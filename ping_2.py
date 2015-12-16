@@ -38,6 +38,7 @@ def checksum(source_string):
 def receive_one_ping(my_socket, ID, timeout):
     """
     receive the ping from the socket.
+    从socket接收ping
     """
     timeLeft = timeout
     while True:
@@ -65,6 +66,7 @@ def receive_one_ping(my_socket, ID, timeout):
 def send_one_ping(my_socket, dest_addr, ID):
     """
     Send one ping to the given >dest_addr<.
+    向目的地址发送ping
     """
     dest_addr  =  socket.gethostbyname(dest_addr)
 
@@ -90,6 +92,8 @@ def send_one_ping(my_socket, dest_addr, ID):
 def do_one(dest_addr, timeout):
     """
     Returns either the delay (in seconds) or none on timeout.
+    返回延迟时间（秒，如超时返回none）
+
     """
     icmp = socket.getprotobyname("icmp")
     try:
