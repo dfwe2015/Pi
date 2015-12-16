@@ -36,7 +36,7 @@ print('*'*40)
 print(ipconfig.read())
 print(ipconfig.close())#如果ipcoifig命令执行成功，则返回None。
 
-# print commands.getstatusoutput('dir')#可能commands.getstatusoutput()只支持UNIX,好在实现起来比较简单，看源码，不过是pipe.close()
+print commands.getstatusoutput('dir')#可能commands.getstatusoutput()只支持UNIX,好在实现起来比较简单，看源码，不过是pipe.close()
 # print commands.getoutput('ipconfig'))#可能只支持UNIX
 # subprocess.check_output('ipconfig','-all')
 
