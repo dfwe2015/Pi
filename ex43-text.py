@@ -3,7 +3,7 @@
 from sys import exit
 from random import randint
 
-"""有限状态机"""
+"""重写 ex43.py ，去除Map类"""
 
 class Scene(object):
 
@@ -11,27 +11,6 @@ class Scene(object):
         print("This scene is not yet configured. Subclass it and implement enter().")
         print("此'场景'尚未配置，通过子类继承它，实现enter()方法。")
         exit(1)#有错误的退出
-
-
-class Engine(object):
-
-    def __init__(self, scene_map):
-        #传入Map值
-        self.scene_map = scene_map
-
-    def play(self):
-        current_scene = self.scene_map.opening_scene()
-        #调用Map()实例的opening_scene()方法，获得具体的Scene子类实例，用于进入游戏开始场景
-
-        while True:
-            #while循环保证可以在各个Scene场景之间切换
-            print("\n--------")
-
-            next_scene_name = current_scene.enter()
-            #调用一个Scene子类实例的enter()方法，获取下一步的Key值
-
-            current_scene = self.scene_map.next_scene(next_scene_name)
-            #继续调用Map实例的next_scene()方法，获取下一步的Value值，也就是下一个Scene子类实例。
 
 
 class Death(Scene):
@@ -146,7 +125,30 @@ class EscapePod(Scene):
                   " You won!")
             return 'finished'
 
-class Map(object):
+# class Map(object):
+#
+#     scenes = {
+#         'central_corridor': CentralCorridor(),
+#         'laser_weapon_armory': LaserWeaponArmory(),
+#         'the_bridge': TheBridge(),
+#         'escape_pod': EscapePod(),
+#         'death': Death()
+#     }
+#
+#     # def __init__(self, start_scene):
+#     #     #获得scene（场景）名,得到self.start_scene
+#     #     self.start_scene = start_scene
+#
+#     def next_scene(self, scene_name):
+#         #Map类核心功能，传入key值，返回value值,value值是一个Scene子类
+#         return self.scenes.get(scene_name)
+#
+#     # def opening_scene(self):
+#     #     #默认传入key值为self.start_scene，返回value值
+#     #     return self.next_scene(self.start_scene)
+
+
+class Engine(object):
 
     scenes = {
         'central_corridor': CentralCorridor(),
@@ -156,20 +158,29 @@ class Map(object):
         'death': Death()
     }
 
-    def __init__(self, start_scene):
-        #获得scene（场景）名,得到self.start_scene
-        self.start_scene = start_scene
+    def __init__(self, scene_name):
+        #传入Map值
+        # self.scene_map = scene_map
+        self.scene_name = scene_name
 
-    def next_scene(self, scene_name):
-        #Map类核心功能，传入key值，返回value值,value值是一个Scene子类
-        return self.scenes.get(scene_name)
+    def play(self):
+        # current_scene = self.scene_map.opening_scene()
+        current_scene = self.scenes.get(self.scene_name)
+        #调用Map()实例的opening_scene()方法，获得具体的Scene子类实例，用于进入游戏开始场景
 
-    def opening_scene(self):
-        #默认传入key值为self.start_scene，返回value值
-        return self.next_scene(self.start_scene)
+        while True:
+            #while循环保证可以在各个Scene场景之间切换
+            print("\n--------")
 
+            next_scene_name = current_scene.enter()
+            #调用一个Scene子类实例的enter()方法，获取下一步的Key值
 
-a_map = Map('central_corridor') #实例化一个Map
-# a_map = Map('death')
-a_game = Engine(a_map) #引用Map，实例化一个Engine（引擎）
+            # current_scene = self.scene_map.next_scene(next_scene_name)
+            current_scene = self.scenes.get(next_scene_name)
+            #继续调用Map实例的next_scene()方法，获取下一步的Value值，也就是下一个Scene子类实例。
+
+# a_map = Map('central_corridor') #实例化一个Map
+# a_map = Map()
+# a_game = Engine(a_map) #引用Map，实例化一个Engine（引擎）
+a_game = Engine('central_corridor')
 a_game.play() #调用Engine的play方法
