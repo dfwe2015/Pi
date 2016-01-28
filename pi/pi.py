@@ -1,16 +1,21 @@
 # -*- coding: utf-8 -*-
 
-import os, sys, socket, commands
+import commands
+import os
+import socket
+
 import pi_commands
 
 # 使用socket获取本机IP地址
 hostname = socket.gethostname()
 IPinfo = socket.gethostbyname_ex(hostname)
 print(IPinfo)
+
 # IPinfo[2]为只有一个字符串元素的列表，应加判断，如果有多个元素，则该设备有多个IP。
 # 将所得元组中的列表转换为字符串
 LocalIP = ''.join(IPinfo[2])
 print(LocalIP)
+
 # 将字符串分割成序列（列表）
 LocalIpList = LocalIP.split('.')
 print(LocalIpList)
