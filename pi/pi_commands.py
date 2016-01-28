@@ -1,60 +1,15 @@
 # -*- coding: utf-8 -*-
-"""重写修改了commands.py,解决调用系统cmd的需求。
-Execute shell commands via os.popen() and return status, output.
 
-Interface summary:
+import os
+import socket
 
-       import commands
+"""重写(修改)了commands.py,解决调用系统cmd的需求。
+def getstatusoutput(cmd)返回一个元组,[0]=0表示调用成功，[0]=1表示调用失败，[1]为cmd返回的内容"""
 
-       outtext = commands.getoutput(cmd)
-       (exitstatus, outtext) = commands.getstatusoutput(cmd)
-       outtext = commands.getstatus(file)  # returns output of "ls -ld file"
-
-A trailing newline is removed from the output string.
-
-Encapsulates the basic operation:
-
-      pipe = os.popen('{ ' + cmd + '; } 2>&1', 'r')
-      text = pipe.read()
-      sts = pipe.close()
-
- [Note:  it would be nice to add functions to interpret the exit status.]
-"""
-from warnings import warnpy3k
-warnpy3k("the commands module has been removed in Python 3.0; "
-         "use the subprocess module instead", stacklevel=2)
-del warnpy3k
-
-__all__ = ["getstatusoutput","getoutput","getstatus"]
-
-# Module 'commands'
-#
-# Various tools for executing commands and looking at their output and status.
-#
-# NB This only works (and is only relevant) for UNIX.
-
-
-# Get 'ls -l' status for an object into a string
-#
-def getstatus(file):
-    """Return output of "ls -ld <file>" in a string."""
-    import warnings
-    warnings.warn("commands.getstatus() is deprecated", DeprecationWarning, 2)
-    return getoutput('ls -ld' + mkarg(file))
-
-
-# Get the output from a shell command into a string.
-# The exit status is ignored; a trailing newline is stripped.
-# Assume the command will work with '{ ... ; } 2>&1' around it..
-#
 def getoutput(cmd):
     """Return output (stdout or stderr) of executing cmd in a shell."""
     return getstatusoutput(cmd)[1]
 
-
-# Ditto but preserving the exit status.
-# Returns a pair (sts, output)
-#
 def getstatusoutput(cmd):
     """Return (status, output) of executing cmd in a shell."""
     import os
@@ -62,32 +17,41 @@ def getstatusoutput(cmd):
     text = pipe.read()
     sts = pipe.close()
     if sts is None: sts = 0
-    if text[-1:] == '\n': text = text[:-1]
+    if text[-1:] == '\n': text = text[:-1]#去掉text结尾的回车符。
     return sts, text
     # print('printing text:'+text)
     # return text
 
-# Make command argument from directory and pathname (prefix space, add quotes).
-#
-def mk2arg(head, x):
-    import os
-    return mkarg(os.path.join(head, x))
+def get_ip():
+    # 使用socket获取本机IP地址
+    hostname = socket.gethostname()
+    IPinfo = socket.gethostbyname_ex(hostname)
 
+    # IPinfo[2]为只有一个字符串元素的列表，应加判断，如果有多个元素，则该设备有多个IP。
+    # 将所得元组中的列表转换为字符串
+    LocalIP = ''.join(IPinfo[2])
+    return LocalIP
 
-# Make a shell command argument from a string.
-# Return a string beginning with a space followed by a shell-quoted
-# version of the argument.
-# Two strategies: enclose in single quotes if it contains none;
-# otherwise, enclose in double quotes and prefix quotable characters
-# with backslash.
-#
-def mkarg(x):
-    if '\'' not in x:
-        return ' \'' + x + '\''
-    s = ' "'
-    for c in x:
-        if c in '\\$"`':
-            s = s + '\\'
-        s = s + c
-    s = s + '"'
-    return s
+def get_ip_list():
+    LocalIP = get_ip()
+    # 将字符串分割成序列（列表）
+    LocalIpList = LocalIP.split('.')
+    return LocalIpList
+
+def get_status_output(cmd = "ipconfig"):
+    if os.name == 'nt':
+        """ 如果操作系统为Windows系统，则更改活动代码页Active code page 为437 英文。
+        如果为936,则是(ANSI/OEM - 简体中文 GBK）。"""
+        os.system('CHCP 437')
+        # ipconfig = os.popen('ipconfig')
+        # print(pi_commands.getstatusoutput(cmd))
+        # print(pi_commands.getstatus('ipconfig'))
+        # print sys.builtin_module_names
+        return getstatusoutput(cmd)
+    else:
+        print('不是Windows系统，那就是UNIX(POSIX)了。')
+        # ipconfig = os.popen('ifconfig')
+        return getstatusoutput(cmd)
+        # break
+
+### The end
