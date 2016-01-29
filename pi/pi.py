@@ -3,7 +3,7 @@
 import pi_commands
 
 
-ass = pi_commands.getiplist()
+ass = pi_commands.getipbylist()
 gateway_address = ass[:]
 gateway_address[3] = '1'
 #修改列表格式的IP地址，比如['192', '168', '1', '66']
