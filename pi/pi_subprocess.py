@@ -36,7 +36,7 @@ def find_all_ip(platform):
         ipconfig_process = subprocess.Popen("ipconfig", stdout=subprocess.PIPE)
         # print(ipconfig_process)
         output = ipconfig_process.stdout.read()
-        print(output)
+        # print(output)
         ip_pattern = re.compile("IPv4 Address(\. )*: %s" % ipstr)
         # print(ip_pattern)
         pattern = re.compile(ipstr)
@@ -81,7 +81,9 @@ def find_all_mask(platform):
 
 def get_broad_addr(ipstr, maskstr):
     iptokens = map(int, ipstr.split("."))
+    # print(iptokens)
     masktokens = map(int, maskstr.split("."))
+    # print(masktokens)
     broadlist = []
     for i in range(len(iptokens)):
         ip = iptokens[i]
@@ -121,6 +123,6 @@ system = platform.system()
 if system == "Windows":
     os.popen('CHCP 437')
 #     subprocess.Popen('CHCP 437', shell=True)
-print(find_all_ip(system))
-# print(find_all_mask(system))
+# print(find_all_ip(system))
+print(find_all_mask(system))
 # print(find_all_broad(system))

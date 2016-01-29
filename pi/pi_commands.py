@@ -51,6 +51,5 @@ def getipbylist():
     # 将字符串分割成序列（列表）
     return getip().split('.')
 
-print getstatusoutput("ipconfigs")
 
 ### The end
