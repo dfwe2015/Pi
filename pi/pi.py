@@ -3,7 +3,7 @@
 import pi_commands
 
 
-ass = pi_commands.get_ip_list()
+ass = pi_commands.getiplist()
 gateway_address = ass[:]
 gateway_address[3] = '1'
 #修改列表格式的IP地址，比如['192', '168', '1', '66']
@@ -13,8 +13,8 @@ print(ass)
 
 ppp = '.'.join(gateway_address)#把列表用'.'拼接，得到IP地址字符串。
 print(ppp)
-print(pi_commands.get_status_output("ping " + ppp))
-print(pi_commands.get_status_output("ping " + pi_commands.get_ip()))
+print(pi_commands.getstatusoutput("ping " + ppp))
+print(pi_commands.getstatusoutput("ping " + pi_commands.getip()))
 
 ### The end
 
