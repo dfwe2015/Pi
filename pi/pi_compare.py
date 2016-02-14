@@ -9,7 +9,7 @@ import pi_getip
 
 # 比较IP大小，确定和哪一行csv信息匹配
 def compareip(iplist, localip=pi_getip.getip()):
-    if pi_getip.getip2int(iplist[0]) < pi_getip.getip2int(localip) < pi_getip.getip2int(iplist[1]):
+    if pi_getip.getip2int(iplist[0]) <= pi_getip.getip2int(localip) <= pi_getip.getip2int(iplist[1]):
         return iplist
 
 # g = pi_csv.getRow()

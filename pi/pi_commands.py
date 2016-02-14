@@ -8,6 +8,10 @@ import subprocess
 import os
 import platform
 
+
+def getstatus(cmd):
+    return getstatusoutput(cmd)[0]
+
 def getoutput(cmd):
     """Return output (stdout or stderr) of executing cmd in a shell."""
     return getstatusoutput(cmd)[1]
