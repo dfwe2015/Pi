@@ -11,8 +11,3 @@ import pi_getip
 def compareip(iplist, localip=pi_getip.getip()):
     if pi_getip.getip2int(iplist[0]) <= pi_getip.getip2int(localip) <= pi_getip.getip2int(iplist[1]):
         return iplist
-
-# g = pi_csv.getRow()
-# print(g.next())
-# print(g.next())
-
