@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from pi.pi_compare import ip2int
-import socket
+from uselike.pi_compare import ip2int
 
 # 排列ip地址列表，暂时不用的。
 
