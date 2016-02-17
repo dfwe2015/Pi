@@ -2,9 +2,9 @@
 
 """适配 Node 和 csv"""
 
-from pi import network_node
-from pi import csv_match
-from pi import local_info
+import network_node
+import csv_match
+import local_info
 
 
 class Map(object):

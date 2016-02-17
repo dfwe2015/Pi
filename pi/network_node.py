@@ -2,7 +2,7 @@
 
 """验证网络节点"""
 
-from pi import pi_commands
+import pi_commands
 
 
 class NetworkNode(object):
