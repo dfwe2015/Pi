@@ -4,7 +4,7 @@ import commands
 import os
 import socket
 
-import pi.pi_commands
+import pi.commands
 
 # 使用socket获取本机IP地址
 hostname = socket.gethostname()

@@ -3,11 +3,13 @@
 """处理csv文件,找到合适的行"""
 
 import csv
-import pi_modifyIP
+
+from pi import modify_ip
 
 
-class Row(object):
-    """用address ip地址逐行比对csv文件的前两列"""
+class CsvMatch(object):
+    """用ip地址字符串逐行比对csv文件的前两列，
+    得到首个匹配的行，以及第一行（title行）"""
     def __init__(self, ip_str):
         with open('IP.csv', 'rb') as csv_file:
             spam_reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
@@ -15,18 +17,14 @@ class Row(object):
             self.row = None
             for row in spam_reader:
                 row = row[0].split(',')
-                if self.compare_ip(row, ip_str):
+                if modify_ip.compare_ip(row, ip_str):
                     print("---Get a row!---\n")
                     self.row = row
                     break
 
-    @staticmethod
-    def compare_ip(ip_list, ip_str):
-        if pi_modifyIP.ip2int(ip_list[0]) <= pi_modifyIP.ip2int(ip_str) <= pi_modifyIP.ip2int(ip_list[1]):
-            return ip_list
 
-    def get_row(self):
+    def get_csv_row(self):
         return self.row
 
-    def get_first_row(self):
+    def get_csv_title(self):
         return self.first_row

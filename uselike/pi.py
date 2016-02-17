@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import pi.pi_commands
-import pi.pi_csvRow
-from pi import pi_modifyIP
+import pi.commands
+import pi.csv_match
+from pi import modify_ip
+import commands
 
-print(pi_modifyIP.getip())
+print(modify_ip.getip())
 r = pi.pi_csvRow.Row()
 gatewayaddress = r.getRow()
 print(gatewayaddress)
