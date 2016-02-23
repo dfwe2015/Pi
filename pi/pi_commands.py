@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- coding: gbk -*-
 
-"""é‡å†™(ä¿®æ”¹)äº†commands.py,è§£å†³è°ƒç”¨ç³»ç»Ÿcmdçš„éœ€æ±‚ã€‚
-def getstatusoutput(cmd)è¿”å›ä¸€ä¸ªå…ƒç»„,[0]=0è¡¨ç¤ºè°ƒç”¨æˆåŠŸï¼Œ
-[0]=å…¶å®ƒ(ä¸€èˆ¬ä¸º1)è¡¨ç¤ºè°ƒç”¨å¤±è´¥ï¼Œ[1]ä¸ºcmdè¿”å›çš„å†…å®¹"""
+"""ÖØĞ´(ĞŞ¸Ä)ÁËcommands.py,½â¾öµ÷ÓÃÏµÍ³cmdµÄĞèÇó¡£
+def getstatusoutput(cmd)·µ»ØÒ»¸öÔª×é,[0]=0±íÊ¾µ÷ÓÃ³É¹¦£¬
+[0]=ÆäËü(Ò»°ãÎª1)±íÊ¾µ÷ÓÃÊ§°Ü£¬[1]Îªcmd·µ»ØµÄÄÚÈİ"""
 
 import subprocess
 import os
@@ -22,25 +22,27 @@ def getstatusoutput(cmd):
     """Return (status, output) of executing cmd in a shell."""
     # if os.name == 'nt':
     # if sys.platform == "Windows":
-    if platform.system() == "Windows":
-        """ å¦‚æœæ“ä½œç³»ç»Ÿä¸ºWindowsç³»ç»Ÿï¼Œåˆ™æ›´æ”¹æ´»åŠ¨ä»£ç é¡µActive code page ä¸º437 è‹±æ–‡ã€‚
-        å¦‚æœä¸º936,åˆ™æ˜¯(ANSI/OEM - ç®€ä½“ä¸­æ–‡ GBKï¼‰ã€‚"""
-        # os.system('CHCP 437')
-        os.popen('CHCP 437')
-        # subprocess.Popen('CHCP 437', shell=True)
-        # subprocessæ— æ³•è¾¾åˆ°æ›´æ”¹Windowsé»˜è®¤ä»£ç é¡µçš„ç›®çš„ï¼Œæš‚æ—¶æ”¾å¼ƒã€‚
+    # if platform.system() == "Windows":
+    #
+    #     """ Èç¹û²Ù×÷ÏµÍ³ÎªWindowsÏµÍ³£¬Ôò¸ü¸Ä»î¶¯´úÂëÒ³Active code page Îª437 Ó¢ÎÄ¡£
+    #     936Îª(ANSI/OEM - ¼òÌåÖĞÎÄ GBK£©, 65001ÎªUTF-8±àÂë"""
+    #     # os.system('CHCP 437')
+    #     os.popen('CHCP 65001')
+    #     # subprocess.Popen('CHCP 437', shell=True)
+    #     # subprocessÎŞ·¨´ïµ½¸ü¸ÄWindowsÄ¬ÈÏ´úÂëÒ³µÄÄ¿µÄ£¬ÔİÊ±·ÅÆú¡£
 
     pipe = os.popen(cmd)
     text = pipe.read()
-    sts = pipe.close() # å‘½ä»¤æ‰§è¡ŒæˆåŠŸ, å¾—åˆ°None
+    text.decode('gbk').encode('gbk')
+    sts = pipe.close() # ÃüÁîÖ´ĞĞ³É¹¦, µÃµ½None
     # pipe = subprocess.Popen(cmd, stdout=subprocess.PIPE)
     # text = pipe.stdout.read()
     # sts = pipe.stdout.close()
 
     if sts is None:
-        sts = 0  # æˆåŠŸ, è¿”å›0
+        sts = 0  # ³É¹¦, ·µ»Ø0
 
     if text[-1:] == '\n':
-        text = text[:-1]  # å»æ‰textç»“å°¾çš„å›è½¦ç¬¦ã€‚
+        text = text[:-1]  # È¥µôtext½áÎ²µÄ»Ø³µ·û¡£
 
     return sts, text

@@ -1,17 +1,16 @@
-# -*- coding: utf-8 -*-
+# -*- coding: gbk -*-
 
-"""é€‚é… Node å’Œ csv"""
+"""ÊÊÅä Node ºÍ csv"""
 
 import network_node
 import csv_match
 import local_info
 
-
 class Map(object):
-    """é€‚é… Node å’Œ csv"""
+    """ÊÊÅä Node ºÍ csv"""
     def __init__(self, start_ip):
 
-        # TODO:è¿›ä¸€æ­¥åˆ¤æ–­æœ¬æœºæƒ…å†µ
+        # TODO:½øÒ»²½ÅĞ¶Ï±¾»úÇé¿ö
         if not start_ip:
             pass
         elif start_ip == '127.0.0.1':
@@ -27,12 +26,12 @@ class Map(object):
                     self.column_num += 1
                 else:
                     break
-                if self.node.get_state()[0]:  # å¯è¾¾ä¸º0, ä¸å¯è¾¾ä¸º1.
-                    print("å‘ç°ä¸å¯è¾¾åœ°å€: %s" % self.node.get_state())
+                if self.node.get_state()[0]:  # ¿É´ïÎª0, ²»¿É´ïÎª1.
+                    print("·¢ÏÖ²»¿É´ïµØÖ·: %s" % self.node.get_node_ip())
                     break
         else:
-            print("IP åœ°å€æ²¡æœ‰åœ¨ csv æ–‡ä»¶ä¸­åŒ¹é….")
-        print("æœ€ç»ˆåœ°å€: %s " % self.node.get_node_ip())
+            print("IP µØÖ·Ã»ÓĞÔÚ csv ÎÄ¼şÖĞÆ¥Åä.")
+        print("×îÖÕµØÖ·: %s " % self.node.get_node_ip())
 
     def get_node(self):
         return self.node
@@ -44,11 +43,19 @@ class Map(object):
         return self.column_num
 
 
-m = Map(local_info.get_local_ip())
-print("=" * 50)
-print("å¾—åˆ°Nodeå®ä¾‹ï¼š%r" % m.get_node())
-print("nodeèŠ‚ç‚¹çš„IPï¼š%r" % m.get_node().get_node_ip())
-print("nodeèŠ‚ç‚¹çš„çŠ¶æ€åé¦ˆï¼š%r" % m.get_node().get_state()[0])
-print("nodeèŠ‚ç‚¹çš„çŠ¶æ€åé¦ˆï¼š%r" % m.get_node().get_state()[1])
-print("nodeèŠ‚ç‚¹åœåœ¨ç¬¬ %r åˆ—" % m.get_column_num())
-print("csvæ–‡ä»¶ç¬¬ä¸€è¡Œç¬¬ %r åˆ—å†…å®¹ï¼š%r" % (m.get_column_num(), m.get_csv_match().get_csv_title()[m.get_column_num()]))
+# m = Map(local_info.get_local_ip())
+# print("=" * 50)
+# print("µÃµ½NodeÊµÀı£º%r" % m.get_node())
+# print("node½ÚµãµÄIP£º%r" % m.get_node().get_node_ip())
+# print("node½ÚµãµÄ×´Ì¬·´À¡£º%r" % m.get_node().get_state()[0])
+# print("node½ÚµãµÄ×´Ì¬·´À¡£º%r" % m.get_node().get_state()[1])
+# print("node½ÚµãÍ£ÔÚµÚ %r ÁĞ" % m.get_column_num())
+# sstr = "csvÎÄ¼şµÚÒ»ĞĞµÚ %s ÁĞÄÚÈİ£º%s" % (m.get_column_num(), m.get_csv_match().get_csv_title()[m.get_column_num()])
+# print(sstr)
+# print(sstr.decode('utf-8').encode('gbk'))
+#
+#
+# s = "ÄãºÃ"
+# print isinstance(s, unicode)
+# print(s.decode('utf-8').encode('gbk'))
+# print(s)

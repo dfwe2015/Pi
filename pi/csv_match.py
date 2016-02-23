@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
+# -*- coding: gbk -*-
 
-"""å¤„ç†csvæ–‡ä»¶,æ‰¾åˆ°åˆé€‚çš„è¡Œ"""
+"""´¦ÀícsvÎÄ¼ş,ÕÒµ½ºÏÊÊµÄĞĞ"""
 
 import csv
 import os, sys
@@ -9,13 +9,15 @@ import modify_ip
 
 
 class CsvMatch(object):
-    """ç”¨ipåœ°å€å­—ç¬¦ä¸²é€è¡Œæ¯”å¯¹csvæ–‡ä»¶çš„å‰ä¸¤åˆ—ï¼Œ
-    å¾—åˆ°é¦–ä¸ªåŒ¹é…çš„è¡Œï¼Œä»¥åŠç¬¬ä¸€è¡Œï¼ˆtitleè¡Œï¼‰"""
+    """ÓÃipµØÖ·×Ö·û´®ÖğĞĞ±È¶ÔcsvÎÄ¼şµÄÇ°Á½ÁĞ£¬
+    µÃµ½Ê×¸öÆ¥ÅäµÄĞĞ£¬ÒÔ¼°µÚÒ»ĞĞ£¨titleĞĞ£©"""
     def __init__(self, ip_str):
-        url = os.path.split(sys.argv[0])[0] + '/IP.csv'
+        # url = os.path.split(sys.argv[0])[0] + os.sep + 'IP.csv'
+        # url = 'C:\Users\Rob\OneDrive\PycharmProjects\Pi\pi\IP.csv'
+        # print(sys.path)
+        url = sys.path[0] + os.sep + 'IP.csv'
         print(url)
 
-        # with open('C:\Users\Rob\OneDrive\PycharmProjects\Pi\pi\IP.csv', 'rb') as csv_file:
         with open(url, 'rb') as csv_file:
             spam_reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
             self.first_row = spam_reader.next()[0].split(',')

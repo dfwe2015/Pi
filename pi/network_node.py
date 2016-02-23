@@ -1,12 +1,12 @@
-# -*- coding: utf-8 -*-
+# -*- coding: gbk -*-
 
-"""éªŒè¯ç½‘ç»œèŠ‚ç‚¹"""
+"""ÑéÖ¤ÍøÂç½Úµã"""
 
 import pi_commands
 
 
 class NetworkNode(object):
-    """ç½‘ç»œèŠ‚ç‚¹çš„ç±», setä¸€ä¸ªIPåœ°å€, getèŠ‚ç‚¹çŠ¶æ€ï¼ŒæˆåŠŸstate[0]ä¸º0ã€‚"""
+    """ÍøÂç½ÚµãµÄÀà, setÒ»¸öIPµØÖ·, get½Úµã×´Ì¬£¬³É¹¦state[0]Îª0¡£"""
     node_count = 0
 
     def __init__(self, node_ip):
@@ -14,9 +14,9 @@ class NetworkNode(object):
         self.state = pi_commands.getstatusoutput("ping -n 2 %s" % self.node_ip)
         # self.state = pi_commands.getstatusoutput("ping -c 2 %s" % self.node_ip)
         NetworkNode.node_count += 1
-        print("===Nodeç±»ç¬¬ %s æ¬¡è¢«å®ç°===" % NetworkNode.node_count)
-        print("commandsçŠ¶æ€ç : %r" % self.state[0])
-        print("commandsä¿¡æ¯:")
+        print("===NodeÀàµÚ %s ´Î±»ÊµÏÖ===" % NetworkNode.node_count)
+        print("commands×´Ì¬Âë: %r" % self.state[0])
+        print("commandsĞÅÏ¢:")
         print(self.state[1])
         print("\n")
 

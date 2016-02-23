@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
+# -*- coding: gbk -*-
 
-"""å¤„ç†æœ¬æœºç½‘ç»œçŠ¶æ€"""
+"""´¦Àí±¾»úÍøÂç×´Ì¬"""
 
 import socket
 
 
 def get_local_ip():
-    """ä½¿ç”¨socketè·å–æœ¬æœºIPåœ°å€"""
-    # å¯ä»¥ä½¿ç”¨ LocalIP = socket.gethostbyname(socket.gethostname())
-    # ä½†æ˜¯è¿™æ ·å¾—åˆ°çš„IPåªæœ‰ä¸€ä¸ªï¼Œå¯¹å¤šç½‘å¡å¤šIPåœ°å€æ— è§£ï¼Œæ¢ç§æ–¹æ³•,è¿”å›åˆ—è¡¨ã€‚
+    """Ê¹ÓÃsocket»ñÈ¡±¾»úIPµØÖ·"""
+    # ¿ÉÒÔÊ¹ÓÃ LocalIP = socket.gethostbyname(socket.gethostname())
+    # µ«ÊÇÕâÑùµÃµ½µÄIPÖ»ÓĞÒ»¸ö£¬¶Ô¶àÍø¿¨¶àIPµØÖ·ÎŞ½â£¬»»ÖÖ·½·¨,·µ»ØÁĞ±í¡£
     local_ip = socket.gethostbyname_ex(socket.gethostname())
-    return local_ip[2][0]  # åªå–äº†ç¬¬ä¸€ä¸ªåœ°å€
+    return local_ip[2][0]  # Ö»È¡ÁËµÚÒ»¸öµØÖ·

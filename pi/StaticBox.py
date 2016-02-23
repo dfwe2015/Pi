@@ -1,3 +1,4 @@
+# -*- coding: gbk -*-
 import wx
 
 import local_info
@@ -11,8 +12,8 @@ class TestPanel(wx.Panel):
 
         mp = map.Map(local_info.get_local_ip())
         mp_message = mp.get_csv_match().get_csv_title()[mp.get_column_num()]
-        mp_message = mp_message.decode('utf-8')
-        mp_message = mp_message.encode('gbk')
+        # mp_message = mp_message.decode('utf-8')
+        # mp_message = mp_message.encode('gbk')
 
         self.log = log
         wx.Panel.__init__(self, parent, -1)
